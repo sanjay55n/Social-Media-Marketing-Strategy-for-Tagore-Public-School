@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tagore Public School SMM Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="graduation-cap.png">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete Social Media Marketing Dashboard for Tagore Public School with Backlink Generator">
+    <meta name="keywords" content="school marketing, education dashboard, SMM strategy, backlink generator, digital marketing">
+    <meta name="author" content="Tagore Public School">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Tagore Public School SMM Dashboard">
+    <meta property="og:description" content="Social Media Marketing Dashboard with Backlink Strategy Generator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tagorepublicschool.edu/dashboard">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Tagore Public School SMM Dashboard",
+      "description": "Social Media Marketing Dashboard with Backlink Generation for Schools",
+      "url": "https://tagorepublicschool.edu/dashboard",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "author": {
+        "@type": "EducationalOrganization",
+        "name": "Tagore Public School",
+        "url": "https://tagorepublicschool.edu"
+      }
+    }
+    </script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      /* ===== CSS STYLES ===== */
+      :root {
+        --primary-color: #1a237e;
+        --secondary-color: #ff9800;
+        --accent-color: #4caf50;
+        --danger-color: #f44336;
+        --warning-color: #ffc107;
+        --info-color: #2196f3;
+        --light-bg: #f8f9fa;
+        --dark-bg: #212529;
+      }
+
+      [data-theme="dark"] {
+        --primary-color: #3949ab;
+        --secondary-color: #ffb74d;
+        --light-bg: #121212;
+        --dark-bg: #1e1e1e;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--light-bg);
+        transition: background-color 0.3s;
+      }
+
+      #mainNav {
+        background: linear-gradient(135deg, var(--primary-color), #0320fd);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+      }
+
+      .logo-circle {
+        width: 42px;
+        height: 42px;
+        background: rgb(14, 39, 177);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+      }
+
+      .sidebar {
+        background-color: white;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+        min-height: calc(100vh - 73px);
+        position: fixed;
+        top: 73px;
+        left: 0;
+        z-index: 100;
+        overflow-y: auto;
+      }
+
+      [data-theme="dark"] .sidebar {
+        background-color: var(--dark-bg);
+        color: white;
+      }
+
+      .sidebar .nav-link {
+        color: #555;
+        padding: 12px 20px;
+        border-left: 3px solid transparent;
+        transition: all 0.3s;
+      }
+
+      [data-theme="dark"] .sidebar .nav-link {
+        color: #ddd;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: rgba(26, 35, 126, 0.05);
+        border-left-color: var(--secondary-color);
+        color: var(--primary-color);
+      }
+
+      .sidebar .nav-link.active {
+        background-color: rgba(26, 35, 126, 0.1);
+        border-left-color: var(--primary-color);
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      main {
+        padding-top: 90px;
+        min-height: 100vh;
+      }
+
+      .card {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-header {
+        background-color: white;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        padding: 15px 20px;
+      }
+
+      [data-theme="dark"] .card {
+        background-color: var(--dark-bg);
+        color: white;
+      }
+
+      [data-theme="dark"] .card-header {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .kpi-card {
+        border-radius: 10px;
+        color: white;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .kpi-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: translate(30px, -30px);
+      }
+
+      .kpi-card i {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        opacity: 0.9;
+      }
+
+      .kpi-card h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      .kpi-card .trend {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      .kpi-card .trend.positive {
+        color: #4caf50;
+      }
+
+      .kpi-card .trend.negative {
+        color: #ff5252;
+      }
+
+      .metric-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .module-card {
+        height: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .module-card:hover {
+        transform: translateY(-8px);
+      }
+
+      .module-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 1.8rem;
+        color: white;
+      }
+
+      .module-progress {
+        height: 6px;
+        border-radius: 3px;
+      }
+
+      .activity-item {
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: background-color 0.3s;
+      }
+
+      .activity-item:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+
+      .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 15px;
+      }
+
+      .progress {
+        height: 10px;
+        border-radius: 5px;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .btn-primary:hover {
+        background-color: #283593;
+        border-color: #283593;
+      }
+
+      .btn-outline-primary {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .btn-outline-primary:hover {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      /* Backlink Generator Specific Styles */
+      .backlink-step {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+      
+      .url-box {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 5px 0;
+        font-family: monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+      }
+      
+      .template-box {
+        background: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 15px 0;
+      }
+      
+      .copy-btn {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 0.85rem;
+      }
+      
+      .copy-btn:hover {
+        background: #388e3c;
+      }
+      
+      .status-badge {
+        padding: 3px 10px;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      
+      .status-completed {
+        background: #4caf50;
+        color: white;
+      }
+      
+      .status-pending {
+        background: #ff9800;
+        color: white;
+      }
+      
+      .status-not-started {
+        background: #757575;
+        color: white;
+      }
+      
+      .tool-item {
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        transition: all 0.3s;
+      }
+      
+      .tool-item:hover {
+        border-color: var(--primary-color);
+        background: #f8f9fa;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          position: static;
+          min-height: auto;
+          margin-bottom: 20px;
+        }
+
+        main {
+          padding-top: 20px;
+        }
+
+        .kpi-card h2 {
+          font-size: 1.8rem;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      .spinner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 200px;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(26, 35, 126, 0.1);
+        border-top-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 300px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .calendar-day {
+        width: 14.28%;
+        height: 100px;
+        border: 1px solid #e0e0e0;
+        padding: 5px;
+        overflow-y: auto;
+        background: white;
+      }
+
+      [data-theme="dark"] .calendar-day {
+        background-color: var(--dark-bg);
+        border-color: #444;
+      }
+
+      .calendar-event {
+        background-color: #e3f2fd;
+        border-radius: 3px;
+        padding: 2px 5px;
+        margin-bottom: 2px;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+
+      .today {
+        background-color: #e8f5e9;
+      }
+
+      [data-theme="dark"] .today {
+        background-color: #2e7d32;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== HTML CONTENT ===== -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <div class="d-flex align-items-center">
+            <div class="logo-circle me-2">
+          <img src="graduation-cap.png" alt="Logo" style="width: 30px; height: 30px;">
+        </div>
+            <div>
+              <h5 class="mb-0">Tagore Public School</h5>
+              <small class="text-light">SMM DASHBOARD </small>
+            </div>
+          </div>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#dashboard"
+                ><i class="fas fa-home"></i> Dashboard</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="modulesDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-layer-group"></i> Modules
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('audit')"
+                    >Social Media Audit</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('strategy')"
+                    >Platform Strategy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('content')"
+                    >Content Creation</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('advertising')"
+                    >Paid Advertising</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('community')"
+                    >Community Management</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('analytics')"
+                    >Analytics & Reporting</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('influencers')"
+                    >Influencer Marketing</a
+                  >
+                </li>
+                <!-- NEW: Backlinks Module -->
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    onclick="loadModule('backlinks')"
+                    ><i class="fas fa-link"></i> Backlink Generator</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="loadModule('calendar')"
+                ><i class="fas fa-calendar-alt"></i> Calendar</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="loadModule('reports')"
+                ><i class="fas fa-chart-bar"></i> Reports</a
+              >
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="darkModeToggle"
+                  />
+                  <label class="form-check-label" for="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                  </label>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center ms-3">
+            <div class="avatar me-2">
+              <i class="fas fa-user-circle fa-2x text-light"></i>
+            </div>
+            <div>
+              <span class="text-light small">Marketing Team</span><br />
+              <span id="currentDateTime" class="text-light small"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
+          <div class="position-sticky pt-5">
+            <div class="sidebar-sticky">
+              <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                <span>MAIN NAVIGATION</span>
+              </h6>
+              <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#" onclick="loadDashboard()">
+                    <i class="fas fa-tachometer-alt me-2"></i>
+                    Dashboard Home
+                  </a>
+                </li>
+              </ul>
+
+              <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                <span>STRATEGY MODULES</span>
+              </h6>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" href="#" onclick="loadModule('audit')">
+                    <i class="fas fa-search me-2"></i>
+                    Social Media Audit
+                    <span class="badge bg-warning float-end">New</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" onclick="loadModule('strategy')">
+                    <i class="fas fa-chess-board me-2"></i>
+                    Platform Strategy
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" onclick="loadModule('content')">
+                    <i class="fas fa-pen-nib me-2"></i>
+                    Content Creation
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    onclick="loadModule('advertising')"
+                  >
+                    <i class="fas fa-ad me-2"></i>
+                    Paid Advertising
+                    <span class="badge bg-danger float-end">3</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    onclick="loadModule('community')"
+                  >
+                    <i class="fas fa-users me-2"></i>
+                    Community Management
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    onclick="loadModule('analytics')"
+                  >
+                    <i class="fas fa-chart-line me-2"></i>
+                    Analytics & Reporting
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    onclick="loadModule('influencers')"
+                  >
+                    <i class="fas fa-star me-2"></i>
+                    Influencer Marketing
+                  </a>
+                </li>
+                <!-- NEW: Backlinks Module in Sidebar -->
+                <li class="nav-item">
+                  <a class="nav-link" href="#" onclick="loadModule('backlinks')">
+                    <i class="fas fa-link me-2"></i>
+                    Backlink Generator
+                    <span class="badge bg-success float-end">Live</span>
+                  </a>
+                </li>
+              </ul>
+
+              <h6 class="sidebar-heading px-3 mt-4 mb-1 text-muted">
+                <span>QUICK ACTIONS</span>
+              </h6>
+              <div class="px-3">
+                <button
+                  class="btn btn-primary btn-sm w-100 mb-2"
+                  onclick="showNotification('Creating new post...', 'info')"
+                >
+                  <i class="fas fa-plus me-1"></i> New Post
+                </button>
+                <button
+                  class="btn btn-outline-primary btn-sm w-100 mb-2"
+                  onclick="generateReport()"
+                >
+                  <i class="fas fa-chart-pie me-1"></i> Generate Report
+                </button>
+                <button
+                  class="btn btn-outline-success btn-sm w-100"
+                  onclick="exportData()"
+                >
+                  <i class="fas fa-download me-1"></i> Export Data
+                </button>
+              </div>
+
+              <div class="card mt-4 mx-2">
+                <div class="card-body">
+                  <h6>Weekly Target</h6>
+                  <div class="progress mb-2">
+                    <div
+                      class="progress-bar bg-success"
+                      style="width: 78%"
+                      id="weeklyTarget"
+                    >
+                      78%
+                    </div>
+                  </div>
+                  <small class="text-muted">Engagement Rate Goal: 5%</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="mainContent">
+          <!-- Content will be loaded dynamically here -->
+          <div id="dashboardContent">
+            <!-- Dashboard content loaded by JavaScript -->
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bg-light border-top">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <span class="text-muted"
+              >© 2024 Tagore Public School. Academy - Social Media Marketing
+              Strategy</span
+            >
+          </div>
+          <div class="col-md-6 text-md-end">
+            <span class="text-muted me-3"
+              >Last Updated: <span id="lastUpdated"></span
+            ></span>
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              onclick="showHelp()"
+            >
+              <i class="fas fa-question-circle"></i> Help
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // ===== GLOBAL VARIABLES =====
+      let currentModule = "dashboard";
+      let charts = {};
+      let mockData = {
+        kpi: [
+          {
+            id: "followers",
+            title: "Total Followers",
+            value: "8,542",
+            change: "+12.5%",
+            trend: "positive",
+            icon: "fas fa-users",
+            color: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            desc: "Across all platforms",
+          },
+          {
+            id: "engagement",
+            title: "Engagement Rate",
+            value: "4.8%",
+            change: "+2.3%",
+            trend: "positive",
+            icon: "fas fa-heart",
+            color: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+            desc: "Monthly average",
+          },
+          {
+            id: "reach",
+            title: "Monthly Reach",
+            value: "124.5K",
+            change: "+18.2%",
+            trend: "positive",
+            icon: "fas fa-eye",
+            color: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+            desc: "Organic + Paid",
+          },
+          {
+            id: "leads",
+            title: "New Leads",
+            value: "342",
+            change: "+8.7%",
+            trend: "positive",
+            icon: "fas fa-user-plus",
+            color: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+            desc: "Inquiry forms filled",
+          },
+        ],
+        modules: [
+          {
+            id: "audit",
+            title: "Social Media Audit",
+            icon: "fas fa-search",
+            color: "#1a237e",
+            progress: 100,
+            status: "completed",
+            desc: "Complete analysis of current social presence",
+          },
+          {
+            id: "strategy",
+            title: "Platform Strategy",
+            icon: "fas fa-chess-board",
+            color: "#4CAF50",
+            progress: 80,
+            status: "in-progress",
+            desc: "Platform-specific approach and planning",
+          },
+          {
+            id: "content",
+            title: "Content Creation",
+            icon: "fas fa-pen-nib",
+            color: "#FF9800",
+            progress: 75,
+            status: "in-progress",
+            desc: "Content calendar and asset creation",
+          },
+          {
+            id: "advertising",
+            title: "Paid Advertising",
+            icon: "fas fa-ad",
+            color: "#9C27B0",
+            progress: 60,
+            status: "in-progress",
+            desc: "Campaign setup and optimization",
+          },
+          {
+            id: "community",
+            title: "Community Management",
+            icon: "fas fa-users",
+            color: "#2196F3",
+            progress: 90,
+            status: "in-progress",
+            desc: "Engagement and response protocols",
+          },
+          {
+            id: "analytics",
+            title: "Analytics & Reporting",
+            icon: "fas fa-chart-line",
+            color: "#00BCD4",
+            progress: 100,
+            status: "completed",
+            desc: "Performance tracking and insights",
+          },
+          {
+            id: "influencers",
+            title: "Influencer Marketing",
+            icon: "fas fa-star",
+            color: "#E91E63",
+            progress: 40,
+            status: "planned",
+            desc: "Partnership and collaboration strategy",
+          },
+          // NEW: Backlink Module
+          {
+            id: "backlinks",
+            title: "Backlink Generator",
+            icon: "fas fa-link",
+            color: "#795548",
+            progress: 100,
+            status: "completed",
+            desc: "Complete backlink strategy generator",
+          },
+        ],
+        activities: [
+          {
+            id: 1,
+            type: "post",
+            title: "New post published on Instagram",
+            desc: "Annual Day celebrations highlights",
+            time: "2 hours ago",
+            icon: "fas fa-camera-retro",
+            color: "#E4405F",
+          },
+          {
+            id: 2,
+            type: "comment",
+            title: "15 new comments on Facebook",
+            desc: "On Parent-Teacher meeting post",
+            time: "4 hours ago",
+            icon: "fas fa-comment",
+            color: "#1877F2",
+          },
+          {
+            id: 3,
+            type: "ad",
+            title: "Ad campaign performance improved",
+            desc: "CTR increased by 22%",
+            time: "Yesterday",
+            icon: "fas fa-chart-line",
+            color: "#4CAF50",
+          },
+          {
+            id: 4,
+            type: "follower",
+            title: "42 new followers gained",
+            desc: "Mostly from local parents",
+            time: "2 days ago",
+            icon: "fas fa-user-plus",
+            color: "#FF9800",
+          },
+          {
+            id: 5,
+            type: "report",
+            title: "Weekly report generated",
+            desc: "Ready for team review",
+            time: "3 days ago",
+            icon: "fas fa-file-alt",
+            color: "#2196F3",
+          },
+        ],
+        calendarEvents: [
+          {
+            title: "Annual Day Posts",
+            date: new Date(),
+            duration: 3,
+            color: "#1a237e",
+          },
+          {
+            title: "Exam Tips Series",
+            date: new Date(new Date().setDate(new Date().getDate() + 5)),
+            duration: 5,
+            color: "#4CAF50",
+          },
+          {
+            title: "Parent-Teacher Meeting",
+            date: new Date(new Date().setDate(new Date().getDate() + 7)),
+            duration: 1,
+            color: "#FF9800",
+          },
+          {
+            title: "Alumni Stories",
+            date: new Date(new Date().setDate(new Date().getDate() + 12)),
+            duration: 1,
+            color: "#9C27B0",
+          },
+          {
+            title: "Sports Day Coverage",
+            date: new Date(new Date().setDate(new Date().getDate() + 15)),
+            duration: 3,
+            color: "#2196F3",
+          },
+        ],
+        // NEW: Backlink Data
+        backlinkDirectories: [
+          { name: "GitHub", url: "https://github.com/", status: "completed", da: 95 },
+          { name: "JustDial", url: "https://www.justdial.com/", status: "completed", da: 92 },
+          { name: "Google Business", url: "https://www.google.com/business/", status: "completed", da: 100 },
+          { name: "Quora", url: "https://www.quora.com/", status: "completed", da: 86 },
+          { name: "Sulekha", url: "https://www.sulekha.com/", status: "completed", da: 82 },
+          { name: "LinkedIn", url: "https://www.linkedin.com/", status: "in-progress", da: 95 },
+          { name: "Product Hunt", url: "https://www.producthunt.com/", status: "pending", da: 85 },
+          { name: "Edutopia", url: "https://www.edutopia.org/", status: "pending", da: 88 },
+          { name: "Reddit", url: "https://www.reddit.com/", status: "pending", da: 90 },
+          { name: "SchoolMyKids", url: "https://www.schoolmykids.com/", status: "pending", da: 75 },
+        ],
+        outreachTemplates: [
+          {
+            id: 1,
+            name: "Guest Post Pitch",
+            content: `Hi [Name],\n\nI came across your excellent work on [their website] about [topic].\n\nWe recently developed a comprehensive Social Media Marketing Dashboard for Tagore Public School that increased engagement by 78%.\n\nWould you consider featuring it as a resource? I'd be happy to provide a guest post or case study.\n\nBest regards,\n[Your Name]\nTagore Public School`
+          },
+          {
+            id: 2,
+            name: "Directory Submission",
+            content: `Dear Administrator,\n\nPlease list Tagore Public School in your directory:\n\nSchool Name: Tagore Public School\nWebsite: https://tagorepublicschool.edu\nDescription: Premier educational institution with innovative digital marketing approach.\n\nThank you for considering our submission.`
+          }
+        ]
+      };
+
+      // ===== INITIALIZATION =====
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set current date and time
+        updateDateTime();
+        setInterval(updateDateTime, 60000);
+
+        // Set last updated
+        document.getElementById("lastUpdated").textContent = formatDate(
+          new Date()
+        );
+
+        // Initialize dark mode
+        initDarkMode();
+
+        // Load dashboard initially
+        loadDashboard();
+
+        // Initialize event listeners
+        initEventListeners();
+      });
+
+      // ===== DATE FUNCTIONS =====
+      function updateDateTime() {
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        };
+        document.getElementById("currentDateTime").textContent =
+          now.toLocaleDateString("en-US", options);
+      }
+
+      function formatDate(date) {
+        return date.toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+
+      // ===== DARK MODE =====
+      function initDarkMode() {
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const savedTheme = localStorage.getItem("theme") || "light";
+
+        document.body.setAttribute("data-theme", savedTheme);
+        darkModeToggle.checked = savedTheme === "dark";
+
+        darkModeToggle.addEventListener("change", function () {
+          const theme = this.checked ? "dark" : "light";
+          document.body.setAttribute("data-theme", theme);
+          localStorage.setItem("theme", theme);
+        });
+      }
+
+      // ===== LOAD CONTENT FUNCTIONS =====
+      function loadDashboard() {
+        currentModule = "dashboard";
+        updateActiveNav();
+
+        const content = `
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3 border-bottom">
+                    <div>
+                        <h1 class="h2">Academy Dashboard</h1>
+                        <p class="lead">Social Media Marketing Strategy Command Center</p>
+                    </div>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button class="btn btn-sm btn-outline-secondary" onclick="exportData()">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="shareDashboard()">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                        <button class="btn btn-sm btn-primary" onclick="refreshData()">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPI Cards -->
+                <div class="row mb-4" id="kpiCards">
+                    ${mockData.kpi
+                      .map(
+                        (kpi) => `
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <div class="kpi-card fade-in" style="background: ${kpi.color};">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <i class="${kpi.icon}"></i>
+                                        <h2>${kpi.value}</h2>
+                                        <p class="mb-1">${kpi.title}</p>
+                                        <small>${kpi.desc}</small>
+                                    </div>
+                                    <span class="trend ${kpi.trend}">${kpi.change}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                      )
+                      .join("")}
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Platform Performance Overview</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="platformChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Engagement Distribution</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="engagementChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Calendar & Notifications -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between">
+                                <h5 class="card-title mb-0">Content Calendar</h5>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="prevMonth()">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <span class="mx-2" id="currentMonth"></span>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="nextMonth()">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="calendarContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Recent Activities</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush" id="activityFeed">
+                                    ${mockData.activities
+                                      .map(
+                                        (activity) => `
+                                        <div class="activity-item d-flex align-items-center">
+                                            <div class="activity-icon" style="background: ${activity.color};">
+                                                <i class="${activity.icon}"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">${activity.title}</h6>
+                                                <p class="mb-0 text-muted small">${activity.desc}</p>
+                                            </div>
+                                            <div class="text-muted small">${activity.time}</div>
+                                        </div>
+                                    `
+                                      )
+                                      .join("")}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Quick Metrics</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-6 mb-3">
+                                        <div class="metric-circle bg-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <h5 class="mt-2">24.5K</h5>
+                                        <small>Impressions</small>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <div class="metric-circle bg-success">
+                                            <i class="fas fa-mouse-pointer"></i>
+                                        </div>
+                                        <h5 class="mt-2">1,248</h5>
+                                        <small>Clicks</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="metric-circle bg-warning">
+                                            <i class="fas fa-share-alt"></i>
+                                        </div>
+                                        <h5 class="mt-2">342</h5>
+                                        <small>Shares</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="metric-circle bg-info">
+                                            <i class="fas fa-comment"></i>
+                                        </div>
+                                        <h5 class="mt-2">189</h5>
+                                        <small>Comments</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module Cards -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <h4 class="mb-3">Strategy Modules</h4>
+                    </div>
+                    ${mockData.modules
+                      .map((module) => {
+                        const statusBadge =
+                          module.status === "completed"
+                            ? "Completed"
+                            : module.status === "in-progress"
+                            ? "In Progress"
+                            : "Planned";
+                        const badgeClass =
+                          module.status === "completed"
+                            ? "bg-success"
+                            : module.status === "in-progress"
+                            ? "bg-warning"
+                            : "bg-secondary";
+
+                        return `
+                            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                <div class="card module-card" onclick="loadModule('${module.id}')">
+                                    <div class="card-body text-center">
+                                        <div class="module-icon" style="background: ${module.color};">
+                                            <i class="${module.icon}"></i>
+                                        </div>
+                                        <h5>${module.title}</h5>
+                                        <p class="text-muted small">${module.desc}</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                            <span class="badge ${badgeClass}">${statusBadge}</span>
+                                            <span class="text-primary fw-bold">${module.progress}%</span>
+                                        </div>
+                                        <div class="progress module-progress mt-2">
+                                            <div class="progress-bar" role="progressbar" 
+                                                 style="width: ${module.progress}%; background: ${module.color};"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                      })
+                      .join("")}
+                </div>
+            `;
+
+        document.getElementById("dashboardContent").innerHTML = content;
+
+        // Initialize charts after content is loaded
+        setTimeout(() => {
+          initCharts();
+          initCalendar();
+        }, 100);
+      }
+
+      function loadModule(moduleId) {
+        currentModule = moduleId;
+        updateActiveNav();
+
+        const moduleTemplates = {
+          audit: `
+                    <div class="pt-5">
+                        <h1 class="h2 mb-4">Social Media Audit</h1>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Platform Analysis</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="auditChart" height="200"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0">Audit Score</h5>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="display-1 text-primary">78%</div>
+                                        <p class="text-muted">Overall Social Media Health</p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-success" style="width: 85%">Facebook</div>
+                                        </div>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-info" style="width: 92%">Instagram</div>
+                                        </div>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-warning" style="width: 65%">YouTube</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-secondary" style="width: 45%">LinkedIn</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+          content: `
+                    <div class="pt-5">
+                        <h1 class="h2 mb-4">Content Creation</h1>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Content Calendar</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="contentCalendar"></div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+          analytics: `
+                    <div class="pt-5">
+                        <h1 class="h2 mb-4">Analytics & Reporting</h1>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Performance Metrics</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="analyticsChart" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                `,
+          // NEW: Backlink Module Template
+          backlinks: `
+                    <div class="pt-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h1 class="h2 mb-0">Backlink Generator</h1>
+                            <button class="btn btn-primary" onclick="generateBacklinkReport()">
+                                <i class="fas fa-download me-1"></i> Export Strategy
+                            </button>
+                        </div>
+                        
+                        <!-- Backlink Strategy Overview -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="backlink-step">
+                                    <h4 class="mb-3"><i class="fas fa-chess-knight me-2"></i> Complete Backlink Strategy</h4>
+                                    <p class="mb-0">Generate 50+ quality backlinks within 3 months using this automated strategy</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="row mb-4">
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-link fa-2x text-primary mb-3"></i>
+                                        <h3>125+</h3>
+                                        <p class="text-muted mb-0">Directory Listings</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-graduation-cap fa-2x text-success mb-3"></i>
+                                        <h3>45+</h3>
+                                        <p class="text-muted mb-0">Education Sites</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-chart-line fa-2x text-warning mb-3"></i>
+                                        <h3>92%</h3>
+                                        <p class="text-muted mb-0">DA Score</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-rocket fa-2x text-danger mb-3"></i>
+                                        <h3>78%</h3>
+                                        <p class="text-muted mb-0">Success Rate</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Directory Submission Section -->
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0"><i class="fas fa-list-alt me-2"></i> Directory Submission Queue</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Directory</th>
+                                                        <th>URL</th>
+                                                        <th>DA Score</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${mockData.backlinkDirectories.map(dir => `
+                                                        <tr>
+                                                            <td><strong>${dir.name}</strong></td>
+                                                            <td><small class="text-muted">${dir.url}</small></td>
+                                                            <td><span class="badge bg-info">${dir.da}</span></td>
+                                                            <td>
+                                                                <span class="status-badge status-${dir.status}">
+                                                                    ${dir.status.charAt(0).toUpperCase() + dir.status.slice(1)}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-outline-primary" onclick="submitToDirectory('${dir.url}')">
+                                                                    <i class="fas fa-external-link-alt"></i> Submit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    `).join('')}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Outreach Templates -->
+                                <div class="card mt-4">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0"><i class="fas fa-envelope me-2"></i> Outreach Email Templates</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        ${mockData.outreachTemplates.map(template => `
+                                            <div class="template-box mb-3">
+                                                <h6>${template.name}</h6>
+                                                <div class="url-box">
+                                                    ${template.content}
+                                                </div>
+                                                <button class="copy-btn mt-2" onclick="copyToClipboard(this)">
+                                                    <i class="fas fa-copy me-1"></i> Copy Template
+                                                </button>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4">
+                                <!-- Step-by-Step Guide -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0"><i class="fas fa-play-circle me-2"></i> 7-Day Action Plan</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <ol class="list-group list-group-numbered">
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Day 1: Setup</div>
+                                                    Create GitHub repository with dashboard code
+                                                </div>
+                                                <span class="badge bg-success rounded-pill"><i class="fas fa-check"></i></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Day 2: Local Directories</div>
+                                                    Submit to JustDial & Sulekha
+                                                </div>
+                                                <span class="badge bg-success rounded-pill"><i class="fas fa-check"></i></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Day 3: Education Portals</div>
+                                                    5 education directory submissions
+                                                </div>
+                                                <span class="badge bg-warning rounded-pill"><i class="fas fa-clock"></i></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Day 4: Content Creation</div>
+                                                    Create 3 guest post articles
+                                                </div>
+                                                <span class="badge bg-secondary rounded-pill"><i class="fas fa-clock"></i></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Day 5: Outreach</div>
+                                                    Send 20 personalized emails
+                                                </div>
+                                                <span class="badge bg-secondary rounded-pill"><i class="fas fa-clock"></i></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Day 6: Social Sharing</div>
+                                                    Share on LinkedIn & Twitter
+                                                </div>
+                                                <span class="badge bg-secondary rounded-pill"><i class="fas fa-clock"></i></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">Day 7: Monitor & Adjust</div>
+                                                    Track results and optimize
+                                                </div>
+                                                <span class="badge bg-secondary rounded-pill"><i class="fas fa-clock"></i></span>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <!-- Quick Tools -->
+                                <div class="card mt-4">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0"><i class="fas fa-tools me-2"></i> Quick Tools</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tool-item">
+                                            <h6><i class="fas fa-code me-2"></i> Generate HTML Snippet</h6>
+                                            <button class="btn btn-sm btn-outline-primary w-100" onclick="generateHTMLSnippet()">
+                                                Get Embed Code
+                                            </button>
+                                        </div>
+                                        <div class="tool-item">
+                                            <h6><i class="fas fa-chart-bar me-2"></i> Check Backlink Status</h6>
+                                            <button class="btn btn-sm btn-outline-success w-100" onclick="checkBacklinkStatus()">
+                                                Analyze Now
+                                            </button>
+                                        </div>
+                                        <div class="tool-item">
+                                            <h6><i class="fas fa-file-pdf me-2"></i> Download PDF Guide</h6>
+                                            <button class="btn btn-sm btn-outline-warning w-100" onclick="downloadPDFGuide()">
+                                                Download Guide
+                                            </button>
+                                        </div>
+                                        <div class="tool-item">
+                                            <h6><i class="fas fa-share-alt me-2"></i> Share Strategy</h6>
+                                            <button class="btn btn-sm btn-outline-info w-100" onclick="shareStrategy()">
+                                                Share on Social
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Progress Tracker -->
+                                <div class="card mt-4">
+                                    <div class="card-header">
+                                        <h5 class="card-title mb-0"><i class="fas fa-tasks me-2"></i> Progress Tracker</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <h6>Directory Submissions</h6>
+                                            <div class="progress mb-2">
+                                                <div class="progress-bar bg-success" style="width: 60%">60%</div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h6>Guest Posts Published</h6>
+                                            <div class="progress mb-2">
+                                                <div class="progress-bar bg-info" style="width: 30%">30%</div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h6>Social Mentions</h6>
+                                            <div class="progress mb-2">
+                                                <div class="progress-bar bg-warning" style="width: 75%">75%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Automated Submission Section -->
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0"><i class="fas fa-robot me-2"></i> Automated Submission</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p>Submit to multiple directories at once (Select all that apply):</p>
+                                        <div class="mb-3" id="directoryChecklist">
+                                            ${mockData.backlinkDirectories.map((dir, index) => `
+                                                <div class="form-check form-check-inline mb-2">
+                                                    <input class="form-check-input" type="checkbox" id="dir${index}" value="${dir.url}">
+                                                    <label class="form-check-label" for="dir${index}">${dir.name}</label>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <button class="btn btn-primary btn-lg" onclick="bulkSubmit()">
+                                            <i class="fas fa-paper-plane me-2"></i> Submit to Selected
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+        };
+
+        const content =
+          moduleTemplates[moduleId] ||
+          `
+                <div class="pt-5 text-center">
+                    <h1 class="h2 mb-4">${
+                      moduleId.charAt(0).toUpperCase() + moduleId.slice(1)
+                    } Module</h1>
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-cogs fa-4x text-muted mb-3"></i>
+                            <h3>Module Under Development</h3>
+                            <p class="text-muted">This module is currently being developed and will be available soon.</p>
+                            <button class="btn btn-primary" onclick="loadDashboard()">
+                                <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        document.getElementById("dashboardContent").innerHTML = content;
+
+        // Initialize module-specific charts
+        if (moduleId === "audit") {
+          setTimeout(initAuditChart, 100);
+        }
+      }
+
+      // ===== BACKLINK FUNCTIONS =====
+      function submitToDirectory(url) {
+        showNotification(`Opening ${url} for submission...`, 'info');
+        setTimeout(() => {
+          window.open(url, '_blank');
+          showNotification('Directory opened in new tab. Please complete the submission form.', 'success');
+        }, 500);
+      }
+
+      function copyToClipboard(button) {
+        const templateBox = button.previousElementSibling;
+        const text = templateBox.innerText;
+        
+        navigator.clipboard.writeText(text).then(() => {
+          const originalText = button.innerHTML;
+          button.innerHTML = '<i class="fas fa-check me-1"></i> Copied!';
+          button.style.background = '#4caf50';
+          
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.background = '';
+          }, 2000);
+        });
+      }
+
+      function generateBacklinkReport() {
+        showNotification('Generating comprehensive backlink strategy report...', 'info');
+        
+        const report = `
+TAGORE PUBLIC SCHOOL - BACKLINK STRATEGY REPORT
+Generated: ${new Date().toLocaleDateString()}
+
+COMPLETE BACKLINK STRATEGY
+===========================
+
+1. EDUCATION DIRECTORIES
+${mockData.backlinkDirectories.filter(d => d.name.includes('School') || d.name.includes('Edu')).map(d => `• ${d.name}: ${d.url}`).join('\n')}
+
+2. LOCAL INDIAN DIRECTORIES
+• JustDial: https://www.justdial.com/
+• Sulekha: https://www.sulekha.com/
+• IndiaMart: https://www.indiamart.com/
+• TradeIndia: https://www.tradeindia.com/
+
+3. TECH & CODE PLATFORMS
+• GitHub: https://github.com/
+• Product Hunt: https://www.producthunt.com/
+
+4. CONTENT OUTREACH TARGETS
+• Edutopia.org
+• TeachThought.com
+• EdSurge.com
+
+ACTION PLAN
+===========
+Week 1: Setup & Local Directories
+Week 2: Education Portals
+Week 3: Content Creation
+Week 4: Outreach & Guest Posts
+
+EXPECTED RESULTS
+================
+• 50+ quality backlinks in 3 months
+• 30% increase in organic traffic
+• Improved local search rankings
+• Higher domain authority
+        `;
+        
+        const blob = new Blob([report], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Tagore-School-Backlink-Strategy.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        setTimeout(() => {
+          showNotification('Backlink strategy report downloaded!', 'success');
+        }, 1000);
+      }
+
+      function bulkSubmit() {
+        const checkboxes = document.querySelectorAll('#directoryChecklist input[type="checkbox"]:checked');
+        if (checkboxes.length === 0) {
+          showNotification('Please select at least one directory', 'warning');
+          return;
+        }
+        
+        showNotification(`Preparing to submit to ${checkboxes.length} directories...`, 'info');
+        
+        let count = 0;
+        const interval = setInterval(() => {
+          if (count < checkboxes.length) {
+            const url = checkboxes[count].value;
+            window.open(url, '_blank');
+            count++;
+          } else {
+            clearInterval(interval);
+            showNotification(`All ${checkboxes.length} directories opened for submission!`, 'success');
+          }
+        }, 1000);
+      }
+
+      function generateHTMLSnippet() {
+        const snippet = `
+<!-- Tagore Public School Backlink Badge -->
+<div style="border: 2px solid #1a237e; border-radius: 10px; padding: 20px; text-align: center; margin: 20px 0;">
+  <h4 style="color: #1a237e; margin-bottom: 10px;">Featured School Dashboard</h4>
+  <p>Check out Tagore Public School's innovative Social Media Marketing Dashboard</p>
+  <a href="https://tagorepublicschool.edu/dashboard" style="background: #1a237e; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+    View Dashboard
+  </a>
+</div>
+        `;
+        
+        navigator.clipboard.writeText(snippet).then(() => {
+          showNotification('HTML snippet copied to clipboard!', 'success');
+        });
+      }
+
+      function checkBacklinkStatus() {
+        showNotification('Analyzing backlink profile...', 'info');
+        setTimeout(() => {
+          const statusCard = document.createElement('div');
+          statusCard.innerHTML = `
+            <div class="card mt-3">
+              <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Backlink Analysis Complete</h5>
+              </div>
+              <div class="card-body">
+                <div class="row text-center">
+                  <div class="col-md-3">
+                    <h3>42</h3>
+                    <small>Total Backlinks</small>
+                  </div>
+                  <div class="col-md-3">
+                    <h3>78%</h3>
+                    <small>Quality Score</small>
+                  </div>
+                  <div class="col-md-3">
+                    <h3>15</h3>
+                    <small>Education Sites</small>
+                  </div>
+                  <div class="col-md-3">
+                    <h3>92</h3>
+                    <small>Domain Authority</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          document.querySelector('#dashboardContent').appendChild(statusCard);
+        }, 2000);
+      }
+
+      function downloadPDFGuide() {
+        showNotification('Downloading complete backlink guide PDF...', 'info');
+        setTimeout(() => {
+          showNotification('PDF guide downloaded successfully!', 'success');
+        }, 1500);
+      }
+
+      function shareStrategy() {
+        if (navigator.share) {
+          navigator.share({
+            title: 'Backlink Strategy for Schools',
+            text: 'Check out Tagore Public School\'s complete backlink generation strategy',
+            url: window.location.href,
+          });
+        } else {
+          navigator.clipboard.writeText(window.location.href);
+          showNotification('Link copied to clipboard! Share it with your team.', 'info');
+        }
+      }
+
+      // ===== CHART FUNCTIONS =====
+      function initCharts() {
+        // Destroy existing charts
+        Object.values(charts).forEach((chart) => {
+          if (chart) chart.destroy();
+        });
+
+        // Platform Performance Chart
+        const platformCtx = document.getElementById("platformChart");
+        if (platformCtx) {
+          charts.platform = new Chart(platformCtx.getContext("2d"), {
+            type: "bar",
+            data: {
+              labels: [
+                "Facebook",
+                "Instagram",
+                "YouTube",
+                "LinkedIn",
+                "Twitter",
+              ],
+              datasets: [
+                {
+                  label: "Followers",
+                  data: [3850, 2850, 1240, 380, 222],
+                  backgroundColor: "rgba(26, 35, 126, 0.7)",
+                  borderColor: "rgba(26, 35, 126, 1)",
+                  borderWidth: 1,
+                },
+                {
+                  label: "Engagement",
+                  data: [420, 680, 190, 45, 32],
+                  backgroundColor: "rgba(255, 152, 0, 0.7)",
+                  borderColor: "rgba(255, 152, 0, 1)",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { position: "top" },
+              },
+              scales: {
+                y: { beginAtZero: true },
+              },
+            },
+          });
+        }
+
+        // Engagement Distribution Chart
+        const engagementCtx = document.getElementById("engagementChart");
+        if (engagementCtx) {
+          charts.engagement = new Chart(engagementCtx.getContext("2d"), {
+            type: "doughnut",
+            data: {
+              labels: ["Likes", "Comments", "Shares", "Saves", "Clicks"],
+              datasets: [
+                {
+                  data: [45, 20, 15, 12, 8],
+                  backgroundColor: [
+                    "rgba(76, 175, 80, 0.8)",
+                    "rgba(33, 150, 243, 0.8)",
+                    "rgba(255, 152, 0, 0.8)",
+                    "rgba(156, 39, 176, 0.8)",
+                    "rgba(244, 67, 54, 0.8)",
+                  ],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { position: "bottom" },
+              },
+            },
+          });
+        }
+      }
+
+      function initAuditChart() {
+        const auditCtx = document.getElementById("auditChart");
+        if (auditCtx) {
+          charts.audit = new Chart(auditCtx.getContext("2d"), {
+            type: "radar",
+            data: {
+              labels: [
+                "Content Quality",
+                "Engagement",
+                "Consistency",
+                "Growth",
+                "Branding",
+              ],
+              datasets: [
+                {
+                  label: "Current Score",
+                  data: [78, 85, 65, 72, 88],
+                  backgroundColor: "rgba(26, 35, 126, 0.2)",
+                  borderColor: "rgba(26, 35, 126, 1)",
+                  borderWidth: 2,
+                },
+                {
+                  label: "Industry Average",
+                  data: [65, 70, 60, 68, 75],
+                  backgroundColor: "rgba(255, 152, 0, 0.2)",
+                  borderColor: "rgba(255, 152, 0, 1)",
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                r: {
+                  beginAtZero: true,
+                  max: 100,
+                },
+              },
+            },
+          });
+        }
+      }
+
+      // ===== CALENDAR FUNCTIONS =====
+      let currentMonth = new Date().getMonth();
+      let currentYear = new Date().getFullYear();
+
+      function initCalendar() {
+        const container = document.getElementById("calendarContainer");
+        if (!container) return;
+
+        renderCalendar(currentMonth, currentYear);
+      }
+
+      function renderCalendar(month, year) {
+        const container = document.getElementById("calendarContainer");
+        if (!container) return;
+
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+
+        document.getElementById(
+          "currentMonth"
+        ).textContent = `${monthNames[month]} ${year}`;
+
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startingDay = firstDay.getDay();
+
+        let calendarHTML = `
+                <div class="d-flex mb-2">
+                    ${["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                      .map(
+                        (day) => `
+                        <div class="text-center fw-bold" style="width: 14.28%">${day}</div>
+                    `
+                      )
+                      .join("")}
+                </div>
+                <div class="d-flex flex-wrap">
+            `;
+
+        // Empty cells for days before the first day of the month
+        for (let i = 0; i < startingDay; i++) {
+          calendarHTML += `<div class="calendar-day"></div>`;
+        }
+
+        // Days of the month
+        const today = new Date();
+        for (let day = 1; day <= daysInMonth; day++) {
+          const date = new Date(year, month, day);
+          const isToday =
+            date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear();
+
+          let dayEvents = "";
+          mockData.calendarEvents.forEach((event) => {
+            const eventDate = new Date(event.date);
+            if (
+              eventDate.getDate() === day &&
+              eventDate.getMonth() === month &&
+              eventDate.getFullYear() === year
+            ) {
+              dayEvents += `<div class="calendar-event" style="background-color: ${event.color}20; color: ${event.color}">
+                                        ${event.title}
+                                      </div>`;
+            }
+          });
+
+          calendarHTML += `
+                    <div class="calendar-day ${isToday ? "today" : ""}">
+                        <div class="fw-bold ${
+                          isToday ? "text-primary" : ""
+                        }">${day}</div>
+                        ${dayEvents}
+                    </div>
+                `;
+        }
+
+        calendarHTML += "</div>";
+        container.innerHTML = calendarHTML;
+      }
+
+      function prevMonth() {
+        currentMonth--;
+        if (currentMonth < 0) {
+          currentMonth = 11;
+          currentYear--;
+        }
+        renderCalendar(currentMonth, currentYear);
+      }
+
+      function nextMonth() {
+        currentMonth++;
+        if (currentMonth > 11) {
+          currentMonth = 0;
+          currentYear++;
+        }
+        renderCalendar(currentMonth, currentYear);
+      }
+
+      // ===== EVENT HANDLERS =====
+      function initEventListeners() {
+        // Refresh button
+        document.addEventListener("click", function (e) {
+          if (e.target.closest("#refreshBtn")) {
+            refreshData();
+          }
+        });
+      }
+
+      function updateActiveNav() {
+        // Update sidebar active state
+        document.querySelectorAll(".sidebar .nav-link").forEach((link) => {
+          link.classList.remove("active");
+          if (
+            link.textContent.includes(
+              currentModule.charAt(0).toUpperCase() + currentModule.slice(1)
+            )
+          ) {
+            link.classList.add("active");
+          }
+        });
+
+        // Update navbar active state
+        document
+          .querySelectorAll("#navbarContent .nav-link")
+          .forEach((link) => {
+            link.classList.remove("active");
+          });
+      }
+
+      // ===== UTILITY FUNCTIONS =====
+      function showNotification(message, type = "info") {
+        // Remove existing notifications
+        document.querySelectorAll(".notification").forEach((n) => n.remove());
+
+        const notification = document.createElement("div");
+        notification.className = `notification alert alert-${type} alert-dismissible fade show`;
+        notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 5000);
+      }
+
+      function refreshData() {
+        const btn = document.querySelector('button[onclick*="refreshData"]');
+        if (btn) {
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+          btn.disabled = true;
+
+          setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.disabled = false;
+            showNotification("Data refreshed successfully!", "success");
+            loadDashboard();
+          }, 1500);
+        }
+      }
+
+      function exportData() {
+        showNotification(
+          "Exporting data... PDF will be downloaded shortly.",
+          "info"
+        );
+        setTimeout(() => {
+          showNotification("Report exported successfully!", "success");
+        }, 2000);
+      }
+
+      function generateReport() {
+        showNotification("Generating comprehensive report...", "info");
+        setTimeout(() => {
+          showNotification(
+            "Report generated and sent to your email!",
+            "success"
+          );
+        }, 2000);
+      }
+
+      function shareDashboard() {
+        if (navigator.share) {
+          navigator.share({
+            title: "Academy Dashboard",
+            text: "Check out Tagore Public School's Social Media Marketing Dashboard",
+            url: window.location.href,
+          });
+        } else {
+          navigator.clipboard.writeText(window.location.href);
+          showNotification("Link copied to clipboard!", "info");
+        }
+      }
+
+      function showHelp() {
+        showNotification(
+          "Opening help documentation... For assistance, email: marketing@tagorepublicschool.edu",
+          "info"
+        );
+      }
+    </script>
+  </body>
+</html>

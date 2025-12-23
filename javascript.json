@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Tagore Public School",
+  "alternateName": "TPS Chennai",
+  "description": "Premier CBSE School in Tamil Nadu with 27+ years of academic excellence",
+  "url": "https://tagorepublicschool.edu.in",
+  "logo": "https://tagorepublicschool.edu.in/images/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Educational Nagar, NH-42",
+    "addressLocality": "Chennai",
+    "addressRegion": "Tamil Nadu",
+    "postalCode": "636002",
+    "addressCountry": "India"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-427-2456789",
+    "contactType": "Admissions",
+    "email": "admissions@tagorepublicschool.edu.in",
+    "availableLanguage": ["English", "Tamil"]
+  },
+  "foundingDate": "1996",
+  "founder": "Dr. RK. Krishnamoorthy",
+  "numberOfEmployees": "200",
+  "priceRange": "₹",
+  "curriculum": "CBSE",
+  "award": [
+    "Best CBSE School Tamil Nadu 2022",
+    "Green Campus Award 2024",
+    "Sports Excellence Award 2024"
+  ],
+  "hasMap": "https://goo.gl/maps/example",
+  "sameAs": [
+    "https://www.facebook.com/tagorepublicschool",
+    "https://www.instagram.com/tagorepublicschool",
+    "https://www.youtube.com/@tagorepublicschool",
+    "https://twitter.com/tagoreschool"
+  ]
+}
